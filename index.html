@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#0a0a0f">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>IRAN // SIGINT MONITOR</title>
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" type="image/svg+xml" href="icons/icon-192.svg">
+    <link rel="apple-touch-icon" href="icons/icon-192.svg">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div id="app">
+        <!-- Top Bar -->
+        <header id="header">
+            <div class="header-left">
+                <div class="sys-icon">◆</div>
+                <div class="sys-title">
+                    <span class="sys-label">SIGINT</span>
+                    <span class="sys-sublabel">IRAN THEATER // LIVE</span>
+                </div>
+            </div>
+            <div class="header-center">
+                <span class="live-indicator">
+                    <span class="live-dot"></span>
+                    <span id="clock">00:00:00 UTC</span>
+                </span>
+                <span class="header-divider">|</span>
+                <span id="article-count" class="header-stat">— FEEDS</span>
+                <span class="header-divider">|</span>
+                <span id="marker-count" class="header-stat">— MARKERS</span>
+            </div>
+            <div class="header-right">
+                <button id="btn-refresh" class="hud-btn" title="Refresh intel">↻</button>
+                <button id="btn-fullscreen" class="hud-btn" title="Fullscreen">⛶</button>
+            </div>
+        </header>
+
+        <!-- Main Layout -->
+        <div id="main">
+            <!-- MAP: top 1/3 -->
+            <section id="map-section">
+                <div id="map"></div>
+                <!-- HUD overlays on map -->
+                <div id="map-hud-tl">
+                    <div id="region-label"></div>
+                </div>
+                <div id="map-hud-tr">
+                    <button class="map-btn" id="btn-zoom-all" title="Overview">◎</button>
+                    <button class="map-btn active" id="btn-auto-tour" title="Auto cycle">▷</button>
+                </div>
+                <div id="map-hud-bottom">
+                    <div id="map-news-ticker"></div>
+                </div>
+                <!-- Scanline effect -->
+                <div class="scanline"></div>
+            </section>
+
+            <!-- Thin separator -->
+            <div id="separator"></div>
+
+            <!-- FEED: bottom 2/3 -->
+            <section id="feed-section">
+                <div id="feed-tabs">
+                    <button class="tab active" data-source="all">ALL</button>
+                    <button class="tab" data-source="breaking">BREAKING</button>
+                    <button class="tab" data-source="analysis">ANALYSIS</button>
+                    <button class="tab" data-source="eyewitness">FIELD</button>
+                </div>
+                <div id="feed-container">
+                    <div id="feed-list"></div>
+                    <div id="feed-loading">
+                        <div class="spinner"></div>
+                        <p>QUERYING SIGINT SOURCES…</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <!-- Detail Modal -->
+    <div id="modal" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header-bar">
+                <span class="modal-title-label">INTEL DETAIL</span>
+                <button class="modal-close">✕</button>
+            </div>
+            <div id="modal-body"></div>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="js/config.js"></script>
+    <script src="js/data.js"></script>
+    <script src="js/map.js"></script>
+    <script src="js/feed.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
