@@ -1,4 +1,4 @@
-const CACHE_NAME = 'iran-tracker-v6';
+const CACHE_NAME = 'iran-tracker-v7';
 const ASSETS = [
     './',
     './index.html',
