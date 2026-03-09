@@ -72,8 +72,8 @@
     FeedManager.renderFeed();
     /* map.js auto-starts tour in init() after 2s */
 
-    /* Auto-refresh every 5 min */
-    setInterval(refreshData, 5 * 60 * 1000);
+    /* Auto-refresh every 2 min */
+    setInterval(refreshData, 2 * 60 * 1000);
 
     console.log('%c[SIGINT] System operational', 'color:#00e676;font-weight:bold');
   } catch (err) {

@@ -70,7 +70,7 @@ const DataService = (() => {
         // GDELT doc API returns articles matching the query
         const url = 'https://api.gdeltproject.org/api/v2/doc/doc'
             + '?query=iran%20(war%20OR%20conflict%20OR%20military%20OR%20strike%20OR%20nuclear%20OR%20missile%20OR%20hormuz)'
-            + '&mode=artlist&maxrecords=50&format=json&sort=datedesc&timespan=7d&sourcelang=eng';
+            + '&mode=artlist&maxrecords=50&format=json&sort=datedesc&timespan=24h&sourcelang=eng';
 
         try {
             const resp = await fetch(url);

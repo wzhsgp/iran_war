@@ -1,4 +1,4 @@
-const CACHE_NAME = 'iran-tracker-v7';
+const CACHE_NAME = 'iran-tracker-v8';
 const ASSETS = [
     './',
     './index.html',
@@ -31,15 +31,36 @@ self.addEventListener('activate', event => {
     self.clients.claim();
 });
 
-// Fetch — network first, fallback to cache
+// Fetch — serve API calls network-only, static assets network-first with cache fallback
 self.addEventListener('fetch', event => {
     // Skip non-GET
     if (event.request.method !== 'GET') return;
 
+    const url = event.request.url;
+
+    // NEVER cache API / data requests — always go to network
+    const isAPI = url.includes('api.gdeltproject.org')
+        || url.includes('allorigins.win')
+        || url.includes('feeds.bbci.co.uk')
+        || url.includes('aljazeera.com/xml')
+        || url.includes('theguardian.com')
+        || url.includes('france24.com');
+
+    if (isAPI) {
+        // Network only — no caching at all for live data
+        event.respondWith(
+            fetch(event.request).catch(() => new Response('{}', {
+                status: 503,
+                headers: { 'Content-Type': 'application/json' }
+            }))
+        );
+        return;
+    }
+
+    // Static assets: network first, fallback to cache
     event.respondWith(
         fetch(event.request)
             .then(response => {
-                // Clone and cache successful responses
                 const clone = response.clone();
                 caches.open(CACHE_NAME).then(cache => {
                     cache.put(event.request, clone);
